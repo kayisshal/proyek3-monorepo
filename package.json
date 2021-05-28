@@ -2,6 +2,7 @@
   "name": "@proyek3",
   "workspaces": [
     "backend",
-    "postgres-database"
+    "postgres-database",
+	"service-penilaian"
   ]
 }
