@@ -3,7 +3,6 @@
   "workspaces": [
     "backend",
     "postgres-database",
-	  "service-penilaian",
-    "service-absensi"
+	"service-penilaian"
   ]
 }
