@@ -33,6 +33,7 @@ $ cd proyek3
 ```sh
 $ git clone https://github.com/d4jtk18p3/proyek3-backend backend
 $ git clone https://github.com/d4jtk18p3/proyek3-postgres-database postgres-database
+$ git clone https://github.com/d4jtk18p3/proyek3-service-absensi service-absensi
 ```
 
 ###### Jalankan npm install dalam direktori proyek3 (workspace)
