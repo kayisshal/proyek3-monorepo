@@ -4,6 +4,7 @@
     "backend",
     "postgres-database",
     "service-penilaian",
-    "sevice-absensi"
+    "service-absensi",
+    "service-logbook"
   ]
 }
