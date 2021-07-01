@@ -5,6 +5,7 @@
     "postgres-database",
     "service-penilaian",
     "service-absensi",
-    "service-logbook"
+    "service-logbook",
+    "notification-service"
   ]
 }
