@@ -4,6 +4,7 @@
     "backend",
     "postgres-database",
     "service-penilaian",
+    "service-monitoring",
     "service-absensi",
     "service-logbook",
     "notification-service"

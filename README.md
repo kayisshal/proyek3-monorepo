@@ -37,6 +37,7 @@ $ git clone https://github.com/d4jtk18p3/proyek3-service-absensi service-absensi
 $ git clone https://github.com/d4jtk18p3/proyek3-service-penilaian service-penilaian
 $ git clone https://github.com/d4jtk18p3/proyek3-service-logbook.git service-logbook
 $ git clone https://github.com/d4jtk18p3/proyek3-notification-service.git notification-service
+$ git clone https://github.com/d4jtk18p3/proyek3-service-monitoring service-monitoring
 ```
 
 ###### Jalankan npm install dalam direktori proyek3 (workspace)
