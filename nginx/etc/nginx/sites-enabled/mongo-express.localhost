@@ -1,0 +1,12 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name mongo-express.localhost;
+
+  location / {
+    resolver 127.0.0.11;
+    set $upstream mongo-express;
+    proxy_pass http://$upstream:8081;
+  }
+}

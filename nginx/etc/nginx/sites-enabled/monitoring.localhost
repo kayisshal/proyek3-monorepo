@@ -1,0 +1,19 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name monitoring.localhost;
+
+  location / {
+    resolver 127.0.0.11;
+    set $upstream frontend;
+    proxy_pass http://$upstream:8080;
+  }
+
+  location /api {
+    resolver 127.0.0.11;
+    set $upstream service-monitoring;
+    rewrite ^/api(?:/(.*))?$ /$1 break;
+    proxy_pass http://$upstream:8080;
+  }
+}

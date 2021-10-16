@@ -1,0 +1,69 @@
+version: "3.9"
+services:
+  service-absensi:
+    build: ./service-absensi
+    volumes:
+    - .:/usr/src
+    depends_on:
+    - postgres
+  service-monitoring:
+    build: ./service-monitoring
+    volumes:
+    - .:/usr/src
+    depends_on:
+    - postgres
+  service-penilaian:
+    build: ./service-penilaian
+    volumes:
+    - .:/usr/src
+    depends_on:
+    - postgres
+  frontend:
+    build: ./frontend
+    volumes:
+    - .:/usr/src
+  nginx:
+    image: nginx:1-alpine
+    ports:
+    - "8080:80"
+    volumes:
+    - ./nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx/etc/nginx/proxy.conf:/etc/nginx/proxy.conf:ro
+    - ./nginx/etc/nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+    environment:
+    - NGINX_PORT=80
+    command: [nginx-debug, '-g', 'daemon off;']
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    volumes:
+    - ./.tmp/var/lib/postgresql/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: proyek3
+      POSTGRES_PASSWORD: proyek3
+      POSTGRES_DB: proyek3
+  adminer:
+    image: michalhosna/adminer
+    restart: always
+    environment:
+      ADMINER_DB: proyek3
+      ADMINER_DRIVER: pgsql
+      ADMINER_PASSWORD: proyek3
+      ADMINER_SERVER: postgres
+      ADMINER_USERNAME: proyek3
+      ADMINER_AUTOLOGIN: 1
+  # mongo:
+  #   image: mongo:5
+  #   restart: always
+  #   volumes:
+  #     - ./.tmp/etc/mongo:/etc/mongo
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: proyek3
+  #     MONGO_INITDB_ROOT_PASSWORD: proyek3
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: proyek3
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: proyek3
+  #     ME_CONFIG_MONGODB_URL: mongo://proyek3:proyek3@mongo:27017/

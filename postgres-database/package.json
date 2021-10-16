@@ -1,0 +1,23 @@
+{
+    "name": "@proyek3/postgres-database",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        "./*": "./src/*"
+    },
+    "scripts": {
+        "lint": "eslint src/** --ext .js,.cjs"
+    },
+    "dependencies": {
+        "cls-hooked": "^4.2.2",
+        "pg": "^8.6.0",
+        "pg-hstore": "^2.3.3",
+        "sequelize": "^6.6.2"
+    },
+    "devDependencies": {
+        "dotenv": "^9.0.2",
+        "eslint": "^7.26.0",
+        "sequelize-cli": "^6.2.0"
+    }
+}
