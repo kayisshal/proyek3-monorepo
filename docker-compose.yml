@@ -18,6 +18,13 @@ services:
     - .:/usr/src
     depends_on:
     - postgres
+  service-logbook:
+    build: ./service-logbook
+    volumes:
+    - .:/usr/src
+    depends_on:
+    - mongo
+    - postgres
   frontend:
     build: ./frontend
     volumes:
@@ -52,18 +59,17 @@ services:
       ADMINER_SERVER: postgres
       ADMINER_USERNAME: proyek3
       ADMINER_AUTOLOGIN: 1
-  # mongo:
-  #   image: mongo:5
-  #   restart: always
-  #   volumes:
-  #     - ./.tmp/etc/mongo:/etc/mongo
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: proyek3
-  #     MONGO_INITDB_ROOT_PASSWORD: proyek3
-  # mongo-express:
-  #   image: mongo-express
-  #   restart: always
-  #   environment:
-  #     ME_CONFIG_MONGODB_ADMINUSERNAME: proyek3
-  #     ME_CONFIG_MONGODB_ADMINPASSWORD: proyek3
-  #     ME_CONFIG_MONGODB_URL: mongo://proyek3:proyek3@mongo:27017/
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: proyek3
+      MONGO_INITDB_ROOT_PASSWORD: proyek3
+    volumes:
+    - ./.tmp/etc/mongo:/etc/mongo
+  mongo-express:
+    image: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: proyek3
+      ME_CONFIG_MONGODB_ADMINPASSWORD: proyek3
+    restart: unless-stopped
