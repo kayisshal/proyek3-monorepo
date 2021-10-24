@@ -1,6 +1,5 @@
 import axios from "axios"
-import errorHandler
-  from "@/datasource/network/errorHandler"
+import errorHandler from "@/datasource/network/errorHandler"
 
 const GOOGLE_CALENDAR_API = "https://www.googleapis.com/calendar/v3/calendars/id.indonesian%23holiday%40group.v.calendar.google.com/events?key="
 const API_KEY = "AIzaSyCYRNbkOMDOgVQ8uSSwg7JVP3gKM93Wq9g"

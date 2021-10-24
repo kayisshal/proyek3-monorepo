@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 set -e
 
-npm install
+cd /usr/src
+flock package.json npm install
+
+cd /usr/src/frontend
 npm run serve:development

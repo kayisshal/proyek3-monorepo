@@ -6,7 +6,7 @@ server {
 
   location / {
     resolver 127.0.0.11;
-    set $upstream logbook;
+    set $upstream frontend;
     proxy_pass http://$upstream:8080;
   }
 

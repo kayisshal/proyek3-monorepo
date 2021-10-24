@@ -1,6 +1,5 @@
 import axios from "axios"
-import errorHandler
-  from "@/datasource/network/errorHandler"
+import errorHandler from "@/datasource/network/errorHandler"
 import { AKUN_API_URL } from "../../../config"
 
 const NETWORK_TIMEOUT = 10000

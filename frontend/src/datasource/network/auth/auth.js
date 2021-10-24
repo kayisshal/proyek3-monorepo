@@ -1,6 +1,5 @@
 import baseHttp from "./http"
-import errorHandler
-  from "@/datasource/network/errorHandler"
+import errorHandler from "@/datasource/network/errorHandler"
 export const requestResetPasswordEmail = async (email) => {
   try {
     const result = await baseHttp.post("user/forget-password", {

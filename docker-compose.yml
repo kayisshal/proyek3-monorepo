@@ -29,6 +29,22 @@ services:
     build: ./frontend
     volumes:
     - .:/usr/src
+  akun-api:
+    build: ./backend
+    volumes:
+    - .:/usr/src
+    depends_on:
+    - postgres
+  akun-keycloak-proxy:
+    build: ./akun-keycloak-proxy
+    volumes:
+    - .:/usr/src
+  notification:
+    build: ./notification
+    volumes:
+    - .:/usr/src
+    depends_on:
+    - postgres
   nginx:
     image: nginx:1-alpine
     ports:
@@ -43,6 +59,8 @@ services:
   postgres:
     image: postgres:14-alpine
     restart: always
+    ports:
+    - 5432:5432
     volumes:
     - ./.tmp/var/lib/postgresql/data:/var/lib/postgresql/data
     environment:
@@ -60,7 +78,10 @@ services:
       ADMINER_USERNAME: proyek3
       ADMINER_AUTOLOGIN: 1
   mongo:
-    image: mongo
+    image: mongo:5.0.3
+    restart: always
+    ports:
+    - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: proyek3
       MONGO_INITDB_ROOT_PASSWORD: proyek3
@@ -73,3 +94,22 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: proyek3
       ME_CONFIG_MONGODB_ADMINPASSWORD: proyek3
     restart: unless-stopped
+  redis:
+    image: redis:6-alpine
+    restart: always
+  keycloak:
+    image: quay.io/keycloak/keycloak:15.0.2
+    restart: always
+    environment:
+      # KEYCLOAK_USER: proyek3
+      # KEYCLOAK_PASSWORD: proyek3
+      KEYCLOAK_FRONTEND_URL: http://akun.localhost:8080/keycloak-proxy/auth
+      # KEYCLOAK_IMPORT: /tmp/realm.json
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_USER: proyek3
+      DB_PASSWORD: proyek3
+      DB_DATABASE: proyek3
+      PROXY_ADDRESS_FORWARDING: 'true'
+    volumes:
+    - ./keycloak/realm-development.json:/tmp/realm.json:ro
