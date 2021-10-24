@@ -19,7 +19,7 @@ Struktur direktori tersebut dapat dibuat dengan cara:
 ###### Klon repositori ini ke dalam direktori proyek3
 
 ```sh
-$ git clone https://github.com/d4jtk18p3/proyek3-workspace.git proyek3
+$ git clone https://github.com/d4jtk18p3/proyek3-monorepo.git proyek3
 ```
 
 ###### Masuk ke dalam repositori proyek3
@@ -28,25 +28,11 @@ $ git clone https://github.com/d4jtk18p3/proyek3-workspace.git proyek3
 $ cd proyek3
 ```
 
-###### Klon semua *sub-project* yang ada
+###### Jalankan semua service
 
 ```sh
-$ git clone https://github.com/d4jtk18p3/proyek3-backend backend
-$ git clone https://github.com/d4jtk18p3/proyek3-postgres-database postgres-database
-$ git clone https://github.com/d4jtk18p3/proyek3-service-absensi service-absensi
-$ git clone https://github.com/d4jtk18p3/proyek3-service-penilaian service-penilaian
-$ git clone https://github.com/d4jtk18p3/proyek3-service-logbook.git service-logbook
-$ git clone https://github.com/d4jtk18p3/proyek3-notification-service.git notification-service
-$ git clone https://github.com/d4jtk18p3/proyek3-service-monitoring service-monitoring
+$ docker-compose -p proyek3 --remove-orphans up
 ```
-
-###### Jalankan npm install dalam direktori proyek3 (workspace)
-
-```sh
-$ npm install
-```
-
-###### Masuk ke dalam direktori dari *sub-project* yang akan dikembangkan dan ikuti arahan `README.md` dari *sub-project* yang bersangkutan
 
 ## Menambahkan *sub-project* baru
 
