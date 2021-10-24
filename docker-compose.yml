@@ -101,15 +101,16 @@ services:
     image: quay.io/keycloak/keycloak:15.0.2
     restart: always
     environment:
-      # KEYCLOAK_USER: proyek3
-      # KEYCLOAK_PASSWORD: proyek3
+      KEYCLOAK_USER: proyek3
+      KEYCLOAK_PASSWORD: proyek3
       KEYCLOAK_FRONTEND_URL: http://akun.localhost:8080/keycloak-proxy/auth
-      # KEYCLOAK_IMPORT: /tmp/realm.json
+      KEYCLOAK_IMPORT: /tmp/realm.json
       DB_VENDOR: postgres
       DB_ADDR: postgres
       DB_USER: proyek3
       DB_PASSWORD: proyek3
       DB_DATABASE: proyek3
+      DB_SCHEMA: keycloak
       PROXY_ADDRESS_FORWARDING: 'true'
     volumes:
     - ./keycloak/realm-development.json:/tmp/realm.json:ro
