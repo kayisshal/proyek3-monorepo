@@ -1,0 +1,18 @@
+{
+  "name": "@proyek3/development-http-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "serve": "nodemon -r dotenv/config src/main.js dotenv_config_path=.env.development"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^2.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.7"
+  }
+}

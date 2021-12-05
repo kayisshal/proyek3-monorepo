@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  tls:
+  - hosts:
+    - keycloak.staging-6766998f.nip.io
+    secretName: keycloak-staging-tls
+  rules:
+  - host: keycloak.staging-6766998f.nip.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: keycloak
+            port:
+              number: 80

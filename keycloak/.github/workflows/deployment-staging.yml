@@ -1,0 +1,26 @@
+name: deployment-staging
+on:
+  workflow_dispatch:
+env:
+  K8S_NAMESPACE: proyek3-staging
+jobs:
+  deployment:
+    environment:
+      name: staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Inject secrets
+        run: |
+          cd .k8s/base
+          kustomize edit add secret keycloak-secret \
+            --from-literal=keycloak.username=${{ secrets.KEYCLOAK_USERNAME }} \
+            --from-literal=keycloak.password=${{ secrets.KEYCLOAK_PASSWORD }} \
+            --from-literal=postgres.username=${{ secrets.POSTGRES_USERNAME }} \
+            --from-literal=postgres.password=${{ secrets.POSTGRES_PASSWORD }}
+      - name: Write k8s config
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.K8S_CONFIG }}" > ~/.kube/config
+      - name: Deploy keycloak
+        run: kustomize build .k8s/overlays/staging/ | kubectl delete -f -

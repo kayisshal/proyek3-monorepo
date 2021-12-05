@@ -1,5 +1,9 @@
-FROM node:16-alpine3.14
+FROM node:16-alpine3.13
 
-WORKDIR /usr/src/akun-keycloak-proxy
+COPY . /src/app
+WORKDIR /src/app
 
-CMD ["./bootstrap.sh"]
+RUN set -ex \
+ && npm install --only=production
+
+CMD ["node", "src/main.js"]

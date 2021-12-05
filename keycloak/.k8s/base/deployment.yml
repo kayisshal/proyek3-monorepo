@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+spec:
+  selector:
+    matchLabels:
+      app: keycloak
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:12.0.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: KEYCLOAK_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              key: keycloak.username
+        - name: KEYCLOAK_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              key: keycloak.password
+        - name: DB_VENDOR
+          value: postgres
+        - name: DB_ADDR
+          value: postgres.proyek3
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              key: postgres.username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-secret
+              key: postgres.password
+        - name: DB_SCHEMA
+          value: keycloak
+        - name: PROXY_ADDRESS_FORWARDING
+          value: 'true'

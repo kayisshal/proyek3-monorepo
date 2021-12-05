@@ -24,24 +24,39 @@ import {
 const { omit, trim } = _
 const { parse: parseHTML } = htmlParser
 
+
 const app = express()
-const redisClient = redis.createClient({
-  host: REDIS_HOSTNAME
-})
-const RedisStore = connectRedis(session)
 
-app.set('trust proxy', 1)
+if (process.env.NODE_ENV === 'production') {
+  const redisClient = redis.createClient({
+    host: REDIS_HOSTNAME
+  })
+  const RedisStore = connectRedis(session)
 
-app.use(session({
-  store: new RedisStore({
-    client: redisClient,
-    prefix: `${SESSION_PREFIX}:`
-  }),
-  name: `${SESSION_PREFIX}`,
-  saveUninitialized: false,
-  secret: uuidv4(),
-  resave: false
-}))
+  app.set('trust proxy', 1)
+  app.use(session({
+    store: new RedisStore({
+      client: redisClient,
+      prefix: `${SESSION_PREFIX}:`
+    }),
+    name: `${SESSION_PREFIX}`,
+    saveUninitialized: false,
+    secret: uuidv4(),
+    resave: false
+  }))
+} else {
+  app.use(cors({
+    origin: 'http://frontend.localhost:5000',
+    credentials: true
+  }))
+
+  app.use(session({
+    name: 'akun-keycloak-proxy_session',
+    saveUninitialized: false,
+    secret: uuidv4(),
+    resave: false
+  }))
+}
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
