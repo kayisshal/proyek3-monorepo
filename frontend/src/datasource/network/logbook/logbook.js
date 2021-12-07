@@ -1,5 +1,6 @@
 import baseHttp from "./http"
-import errorHandler from "@/datasource/network/errorHandler"
+import errorHandler
+  from "@/datasource/network/errorHandler"
 import entri from "./entri"
 
 const LOGBOOKS_URL = "/logbook/logbook"

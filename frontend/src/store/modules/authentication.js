@@ -18,9 +18,19 @@ const authentication = {
   },
 
   getters: {
+    // identity: state => {
+    //   return state.identity
+    // }
     identity: state => {
-      return state.identity
+      console.log(state.identity)
+      return {
+        realm_access: {
+          roles: ["dosen"]
+        },
+        preferred_username: "196009281994031000"
+      }
     }
+
   },
 
   actions: {

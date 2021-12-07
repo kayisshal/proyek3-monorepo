@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node app.js",
         "lint": "eslint src/** --ext .js,.cjs",
-        "serve:development": "nodemon --experimental-specifier-resolution=node -r dotenv/config src/main.js dotenv_config_path=.env.development"
+        "serve:development": "nodemon --experimental-specifier-resolution=node -r dotenv/config src/main.js dotenv_config_path=.env.development",
+        "serve:production": "nodemon --experimental-specifier-resolution=node -r dotenv/config src/main.js dotenv_config_path=.env.production"
     },
     "dependencies": {
         "body-parser": "^1.19.0",

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "lint": "eslint src/** --ext .js",
-    "serve:development": "nodemon -r dotenv/config src/main.js dotenv_config_path=.env.development"
+    "serve:development": "nodemon -r dotenv/config src/main.js dotenv_config_path=.env.development",
+    "serve:production": "nodemon -r dotenv/config src/main.js dotenv_config_path=.env.production"
   },
   "dependencies": {
     "connect-redis": "^5.2.0",

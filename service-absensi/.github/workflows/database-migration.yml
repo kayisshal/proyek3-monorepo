@@ -36,7 +36,7 @@ jobs:
         run: npm ci
       - name: Migrate database
         env:
-          DATABASE_HOSTNAME: localhost
+          DATABASE_HOSTNAME: db
           DATABASE_PORT: 5432
           DATABASE_USERNAME: proyek3
           DATABASE_DATABASE: proyek3

@@ -64,6 +64,7 @@ export const createUser = async (req, res, next) => {
     }
 
     const tempPassword = uuid() // this is random password for keycloak
+    console.log(tempPassword)
 
     const resultInsertToKc = await kcAdminClient.users.create({
       username: noInduk,
@@ -175,6 +176,7 @@ export const deleteUserbyUsername = async (req, res, next) => {
     let resultDeleteOnDB
 
     if (userKc[0].attributes.role[0] === 'mahasiswa') {
+      console.log(userKc[0].attributes.nomorInduk[0])
       resultDeleteOnDB = await deleteMahasiswabyId(
         userKc[0].attributes.noInduk[0]
       )
